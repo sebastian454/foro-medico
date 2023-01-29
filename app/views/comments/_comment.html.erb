@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 ">
+      <div class="card foroComentarios sombras">
+        <div class="comment container">
+          <h4> <%= comment.user.username %></h4><br />        
+          <% if current_user == comment.user %>
+              <div class="btn-group float-end">
+                <%= link_to "Editar", nil, remote: true, class:"btn btn-outline-info",
+                data: {
+                  controller: "comments",
+                  action: "comments#toggleForm",
+                  comments_form_param: "edit-form-#{comment.id}",
+                  comments_body_param: "comment-body-#{comment.id}",
+                  comments_edit_param: "edit-button-#{comment.id}"
+                },
+                id: "edit-button-#{comment.id}" %>
+                <%= button_to "Eliminar", [post, comment], class:"btn btn-outline-danger", method: :delete %>
+              </div>
+              <div id="edit-form-<%= comment.id%>" class="d-none">
+                <%= render 'comments/form',
+                post: @post,
+                comment: comment,
+                submit_label: "Update" %>
+              </div>
+          <% end %>   
+          <br>       
+          <div id="comment-body-<%= comment.id %>">
+            <%= comment.body %>
+          </div>
+          <br>
+          <!-- informacion de timestamp ejem  posteado hace 1 hora -->
+          <div class="derecha">
+            <% if (comment.updated_at - comment.created_at) > 1 %>
+              <span>Editado hace <%= time_ago_in_words(comment.updated_at) %> </span>
+            <% else %>
+              <span>Creado hace <%= time_ago_in_words(comment.created_at) %> </span>
+            <% end %>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

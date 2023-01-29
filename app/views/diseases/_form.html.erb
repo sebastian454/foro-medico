@@ -1,0 +1,57 @@
+<%= form_with(model: @disease) do |form| %>
+  <% if @disease.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@disease.errors.count, "error") %> prohibited this @disease from being saved:</h2>
+
+      <ul>
+        <% @disease.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <div class="field col s12 m12 l12">
+
+          <ul class="collection with-header">
+            <li class="collection-header center">
+
+              <h4 class="fucsia_font">Selecciona Skills</h4>
+            </li>
+              <% Diagnostic.all.each  do |diagnostic| %>
+              <div class="col s6 m4 l4">
+                <li class="collection-item ">
+                  <div>
+                    <label>
+                        <%= radio_button_tag "diagnostics[]", diagnostic.id , id:"diagnostic_id"%>
+                          <span>
+                              <%= "#{diagnostic.code.truncate(30)} "%>
+                          </span>
+                      </label>
+
+                  </div>
+
+                </li>
+
+              </div>
+
+              <% end %>
+
+          </ul>
+
+<label for="exampleDataList" class="form-label">Datalist example</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+<datalist id="datalistOptions">
+  <option value="San Francisco">
+  <option value="New York">
+  <option value="Seattle">
+  <option value="Los Angeles">
+  <option value="Chicago">
+</datalist>
+</div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

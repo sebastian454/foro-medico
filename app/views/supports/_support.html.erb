@@ -1,0 +1,32 @@
+<div id="<%= dom_id support %>">
+
+<%= link_to support  do %>
+  <div class="bordesSoportes shadow"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+              <div class="row">
+                <ul class="listaBotonoes right ">
+                  <li><img src="/images/eye.png" alt=""> </li>                  
+                </ul>
+              </div>
+              <div class="row">
+                <img src="/images/caprtamorada.png" alt="" class="caperticaAzul">  
+                <br>
+                   <ul>
+                    <li class="listaMorado">Diagnostico: <%= support.diagnosis%> </li>            
+                    <li class="listaMorado">Fecha de exp: <%= support.expiration_date%></li>
+                  </ul>         
+              </div>
+            </div>
+        </div>
+    </div>     
+  <br>                   
+
+  </div>    
+<% end %> 
+
+
+</div>
+
+

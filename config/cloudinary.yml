@@ -1,0 +1,13 @@
+---
+development:
+  cloud_name: dty7mwn55
+  api_key: '552636835252618'
+  api_secret: "-W0TCghqSGj5cRsVb68d617e9Y8"
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dty7mwn55
+  api_key: '552636835252618'
+  api_secret: "-W0TCghqSGj5cRsVb68d617e9Y8"
+  enhance_image_tag: true
+  static_file_support: true

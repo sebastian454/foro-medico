@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @disease %>
+
+                <div id="diseases">
+                  <% @diagnostics.each do |diagnostic| %>
+                    <%= render diagnostic %>
+                    <p>
+                      <%= link_to "Show this disease", diagnostic %>
+                    </p>
+                  <% end %>
+                </div>
+
+<div>
+  <%= link_to "Edit this disease", edit_disease_path(@disease) %> |
+  <%= link_to "Back to diseases", diseases_path %>
+
+  <%= button_to "Destroy this disease", @disease, method: :delete %>
+</div>

@@ -1,0 +1,48 @@
+<br> <div class="container ">       
+        <div class="row">
+          <div class="col col-lg-4  ">
+          <img src="/images/fondoLogin.png" alt="" class="barraInteriro">
+          </div>
+          <div class="col col-lg-8">
+          <div class=" cartaNewUser shadow-sm p-3 mb-5 ">
+           <div class="row">
+            <div class="center">
+              <h3>Correo de confirmación</h3>
+              <span>Si no has recibido nuestro correo de confirmación  para validar tu cuenta, vuelve e ingresa el correo con el que te registraste.</span>
+            </div>
+          <br>
+              <div class="form-row center">                
+                <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+                <br>                
+                  <div class="form-group col-lg-12">
+                    <%= f.label :email , "Correo electronico"%>
+                    <div class=" ">
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) , class: "form-control labeles"  %>
+                    </div>
+                  </div>
+                 
+                <br>            
+                  <div class="actions center">
+                  
+                    <%= f.submit "Enviar" ,class:"botonrellenoMOrado  " %>
+                  </div>
+                  ¿Aún no tienes una cuenta ?
+                  <%= render "devise/shared/links" %>
+                <% end %>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+              </div>
+        </div>
+          </div>
+
+          </div>
+        </div>
+
+       
+    </div>    
+
+
+

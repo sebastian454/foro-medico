@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  event_type: MyString
+  expiration_date: 2022-06-25
+  diagnosis: MyString
+
+two:
+  title: MyString
+  event_type: MyString
+  expiration_date: 2022-06-25
+  diagnosis: MyString

@@ -1,0 +1,115 @@
+<div class="container">
+
+  <div class="card hoverable foroIndex">
+  <div class="container">
+    <div class="row lineaInferior ">
+      <div class="row">
+        <h5 class="categoriaArticulo">
+          <% if @post.user.is_admin? %>  
+            Novedades
+          <% end %>                      
+          <% if @post.user.is_normal_user? %>  
+            Pregunta   
+          <% end %>  
+          <% if @post.user.permission_level.nil? %>  
+            Pregunta   
+          <% end %>  
+          <% if @post.user.is_medico? %>  
+            Artículos   
+          <% end %>    
+        </h5>
+      </div>
+      <div class="row">   
+        <div class="col-sm-8 col-md-8 col-lg-8">
+          <% if @post.anonimo == true %>  
+          <img src="/images/icong.png" alt="" class="avatarnn">
+          anonimo
+          <% else %>
+          <ul class="listadoUl align-middle">
+            <li class=""><img src="/images/pers.png" alt="" class="avatarnn"></li>
+            <li class="">
+              <%= link_to @post.user.username, user_path(@post.user) ,class:"tituloLink" %>                
+          <% end %>  
+            </li>
+          </ul>
+
+        </div>     
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <br>
+          <div class="rigth">
+            <ul class="listadoUl align-middle">
+              <% if user_signed_in? && current_user == @post.user %>                        
+                <%= link_to  edit_post_path(@post) do %>
+                  <img src="/images/lapiz.png" alt="" class="menuMediXt " >
+                <% end%>  
+                 <%= button_to  @post, class:"sinFondo", method: :delete do %>
+                    <img src="/images/trash.png" alt="" class="menuMediXt " >
+                <% end%>   
+                        
+            <% end %>
+              
+            </ul>
+  
+          </div>
+          
+
+        </div>
+      
+   
+
+      </div>
+             
+      <br>
+    </div>
+    <div class="row lineaBottom">
+      <h4><%= @post.title %></h4>
+            <%= @post.body %>
+        <%= link_to @post do %>
+          <% if !@post.imageblog.attachment.nil? %>
+            <%= cl_image_tag(@post.imageblog.key,  sign_url: true ,class:"portadaBlogIndex") %>
+          <% else %>
+            <img src="/images/nno.png" alt="" class="portadaBlogIndex " >
+          <% end %>
+         
+        <% end %>  
+    </div>
+   
+  </div>
+  
+
+</div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="card  foroComentarios">
+    <br>
+      <ul  class="listadoUl align-middle">      
+        <li>
+          <img class="mensajesC" src="/images/comments.png" alt="">        
+          <span class="numeritoBlog3 center "><%= @post.comments.count%></span>
+        </li>
+        <li class="espaciadoLista"><h6><%= pluralize(@post.views, "Vistas") %></h6></li>
+      </ul>  
+  </div>
+</div>
+</div>
+<br>
+<div class="container">
+<div class="foroComentarios">
+    <%= render 'comments/form', 
+      post: @post, 
+      comment: @post.comments.build,
+      submit_label: "Comentar" %>  
+  </div>
+<br>
+</div>
+<div class="container">
+<div class="foroComentarios sombra">
+    <% @comments.each do |comment| %>
+        <%= render 'comments/comment', 
+        post: @post, 
+        comment: comment %>
+    <% end %>
+</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="">
+  <%= form_with(model: [post, comment]) do |f| %>
+    <div >
+    <br>
+    <p class="textoGris">Escribe un comentario</p>    
+      <%= f.text_area :body , class:"texArea2" %>
+      <br>
+      <%= f.submit submit_label, class: "botonrellenoMOrado derecha" %>
+    </div>
+  <% end %>
+  <br><br>
+</div>

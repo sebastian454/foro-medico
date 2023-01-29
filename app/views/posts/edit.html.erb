@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Editing post</h1>
+  <%= render "form", post: @post %>
+  <br>
+  <div>
+    <%= link_to "Mostrar este articulo", @post %> |
+    <%= link_to "Volver al foro", posts_path %>
+  </div>
+</div>

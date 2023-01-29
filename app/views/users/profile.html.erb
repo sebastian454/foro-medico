@@ -1,0 +1,304 @@
+<div class="container mt-5">
+  <div class="row">    
+  <%# carpetas de soportes %>
+    <div class="col-sm-12 col-md-6 col-lg-6">  
+      <div class="card round">
+        <div class="card-body">
+          <ul class="listadoUl ">
+            <li><img src="/images/folder.png" alt="" class="align-middle"></li>
+            <li><h5 class="categoriaArticulo align-middle">Documentos medicos</h5></li>
+          </ul>
+          <p>
+            Organiza aqui todos tus documentos medicos, solo debes crear una carpeta por evento (atencion medica) y subir sus respectivos soportes.
+          </p>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">  
+                <div class="card tarjetaGraficacion1 round sombras">
+                  <div class="card-body">                     
+                       
+                          <div class="card-content text-p center">
+                            <div>
+                              <%= line_chart current_user.histories.group_by_day(:created_at).count , xtitle: "Mes",  colors: ["#fff"], download: "carpeta_mes" , height: "250px" , refresh: 60 %>
+                            </div>
+                            <br>
+                            <p class="text-p2 bottom text-light" >
+                              Carpetas por Fecha   <%= @histories.count%>  
+                            </p>
+                          </div>
+
+                  </div>
+                </div>
+
+            </div>
+            
+            <div class="col-sm-12 col-md-6 col-lg-6">  
+                <div class="card tarjetaGraficacion2 round sombras ">
+                    <div class="card-body">
+                      <div class="card-content text-p center">
+                        <div class="esta">
+                          <%= line_chart current_user.supports.group_by_day(:created_at).count  , xtitle: "Mes", colors: ["#fff"], download: "soportes_mes" , height: "250px" , refresh: 60 %>
+                        </div>
+                        <br>
+                        <div class="valing-wrapper">
+                          <p class="text-p2 bottom text-light">
+                            Soportes por Fecha <%= current_user.supports.count %> 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+            <br>
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 center">
+              <!-- Button trigger modal -->
+              <a class="botonModalAzul" data-bs-toggle="modal" data-bs-target="#modalCarpeta">             
+                 <img src="/images/capertica.png" alt="">  Crear Carpeta
+              </a>              
+              <!-- Modal -->
+              <div class="modal fade" id="modalCarpeta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Crear Carpeta</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <%= render 'histories/form' %>   
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-6 center">
+             <!-- Button trigger modal -->
+              <a class="botonModalMorado" data-bs-toggle="modal" data-bs-target="#modalSoporte">             
+                  <img src="/images/soporte.png" alt="">  Crear Soporte
+              </a>              
+              <!-- Modal -->
+              <div class="modal fade" id="modalSoporte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Crear Soporte</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <%= render 'supports/form' %>   
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+
+            </div>
+ 
+                
+          </div>
+
+          
+        </div>
+      </div>
+<br>
+      <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 ">        
+        <div class="row">
+          <div class="card round ">
+            <div class="container network_wrapper col-sm p-2 ">      
+              <div class="card-header shadow p-3">              
+                  <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">                      
+                      <li class="nav-item espacioList">
+                          <a class="nav-link " data-bs-toggle="tab" href="#carpetas">Carpetas</a>
+                      </li>                      
+                      <li class="nav-item espacioList">
+                        <a class="nav-link" data-bs-toggle="tab" href="#soportes">Soportes</a>
+                    </li>
+                  </ul>
+              </div>
+              <br>
+
+              <form class="card-body tab-content ">
+                  <div class="tab-pane active" id="carpetas">     
+                   <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12"> 
+                        <h5>Historias</h5>  
+                        <div class="container">
+                          <div class="row">
+                              <% @histories.each do |history| %>
+                                    <div class="col-sm-12 col-md-6 col-lg-6"> 
+                                       <%= render history %>     
+                                    </div>
+                            <% end %>                        
+                          </div>
+                        </div>                        
+                          
+                          <%= will_paginate @histories ,class:"flickr_pagination" %>
+                          
+                      </div>
+                   </div>     
+                  </div>
+                  <div class="tab-pane" id="soportes">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">                                 
+                          <h5>Soportes</h5>        
+                                <div class="container">
+                                  <div class="row">
+                                    <% @supports.each do |support| %>
+                                      <div class="col-sm-12 col-md-6 col-lg-6">                                 
+                                        <%= render support %>
+                                      </div>                                 
+                                    <% end %>                                                   
+                                  </div>
+                                </div>
+                                <br>
+                              <%= will_paginate @supports ,class:"flickr_pagination" %>                                           
+                        </div>
+                    </div>
+
+                </div>                  
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row">
+        <div class="card round">
+          <div class="card-body">
+              <ul class="listadoUl ">
+                  <li><img src="/images/hoja.png" alt="" class="align-middle"></li>
+                  <li><h5 class="categoriaArticulo align-middle">Estilo de vida</h5> <br></li>
+                  
+              </ul>
+              <br>  
+              <ul>
+                <li>
+                  Consumo de tabaco: 
+                  <br>
+                  <h6><%= @user.tobacco_consumption %></h6>
+                </li>
+                <br>
+                <li>Consumo de drogas:
+                  <br>
+                  <h6><%= @user.drugs_consumption %></h6>
+                </li>
+                <br>
+                <li>Consumo de alcohol:
+                 <br>
+                  <h6><%= @user.alcohol_consumption %></h6>
+                </li>
+                <br>
+                <li>Actividad sexual:
+                  <br>
+                  <h6><%= @user.sexual_activity %></h6>
+                </li>
+                </li>
+              </ul>
+              <div class="right">
+              <a href="">
+                  <%= link_to edit_user_registration_path, class:"botonBordeado" do %>
+                    Editar <img src="/images/lapiz2.png" alt="">
+                  <% end %>
+              </a>
+               
+              </div>
+          </div>
+        </div>
+ 
+</div>
+
+<br>
+<div class="row">
+        <div class="card round">
+          <div class="card-body">
+              <ul class="listadoUl ">
+                  <li><img src="/images/gim.png" alt="" class="align-middle"></li>
+                  <li><h5 class="categoriaArticulo align-middle">Enfermedades</h5> <br></li>                  
+              </ul>
+              <ul>
+              <li></li>
+
+
+                <%= link_to "New diagnostic", new_diagnostic_path %>
+                
+
+              </ul>
+              
+              <br>  
+              
+            
+              <div class="right">        
+                  <!-- Button trigger modal -->
+                  <a class="botonBordeado" data-bs-toggle="modal" data-bs-target="#modalEnfermedades">             
+                    <img src="/images/capertica.png" alt="">   Editar <img src="/images/lapiz2.png" alt="">
+                  </a>                                    
+             </div>
+               <!-- Modal -->
+              <div class="modal fade" id="modalEnfermedades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Agregar enfermedad</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                       <%= render 'diseases/form' %>   
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>    
+          </div>
+        </div>
+ 
+</div>
+<%# division de en medio %>
+</div>
+
+<%# division de en medio %>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <div class="card round">
+          <div class="card-body">
+            <ul class="listadoUl ">
+              <li><img src="/images/darosPersonales.png" alt="" class="align-middle"></li>
+              <li><h5 class="categoriaArticulo align-middle">Datos Generales</h5></li>
+            </ul>
+            <div class="row">
+                 <div class="col-sm-12 col-md-6 col-lg-6">
+                    <h5 class="datosGenerales">Nombres:  <%= @user.first_name %> <%= @user.second_name %> </h5>
+                    <h5 class="datosGenerales">Apellidos: <%= @user.last_name %> <%= @user.second_last %> </h5>            
+                    <h5 class="datosGenerales">Fecha de nacimiento:  <%= @user.birthdate %> </h5>            
+                    <h5 class="datosGenerales">Genero:  <%= @user.genero %> </h5>
+                    
+                  </div>            
+
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <h5 class="datosGenerales">Celular  <%= @user.cellphone %> <%= @user.second_name %> </h5>
+                    <h5 class="datosGenerales">Tipo de documento:  <%= @user.type_document %> </h5>
+                    <h5 class="datosGenerales">No de documento  <%= @user.no_document %> </h5>
+                    <h5 class="datosGenerales">Email:  <%= @user.email %> </h5>
+                    
+                    
+                  </div>            
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+    
+    

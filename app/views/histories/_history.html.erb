@@ -1,0 +1,26 @@
+<%= link_to history  do %>
+  <div class="bordesHistorias shadow"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+              <div class="row">
+                <ul class="listaBotonoes right ">
+                  <li><img src="/images/eye.png" alt=""> </li>                  
+                </ul>
+              </div>
+              <div class="row">
+                <img src="/images/capertaAzul.png" alt="" class="caperticaAzul">  
+                <br>
+                   <ul>
+            <li>Carpeta: <%= history.name%> </li>
+            <li>Soportes: <%= history.supports.count%></li>
+            <li>Fecha: <%= history.created_at%></li>
+          </ul>       
+              </div>
+            </div>
+        </div>
+    </div>     
+  <br>                   
+
+  </div>    
+<% end %> 

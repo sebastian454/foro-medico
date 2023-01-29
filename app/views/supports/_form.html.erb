@@ -1,0 +1,89 @@
+<%= form_with(model: @support, local: true) do |form| %>
+  <% if @support.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@support.errors.count, "error") %> prohibited this support from being saved:</h2>
+      <ul>
+      <% @support.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container center">
+
+      <div class="col col-lg-12 col-md-12 col-sm-12">
+        <div class="row">
+          <div class="center">
+            <div class="file-field field">
+              <div class="btn white center">
+                <ul>
+                  <br>
+                  <li></li>
+                  <br>
+                  <li><%=form.file_field :soporte , class: 'form-control'%></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+       </div>
+
+       <div class="form-group col-lg-12">
+           <%= form.label  :diagnosis, for:"autocomplete-input"%>
+           <br>
+           <%= form.text_field  :diagnosis , id:"autocomplete-input"  , class: "form-control"%>
+
+       </div>
+
+
+      <div class="form-group col-lg-12">
+        <label for="">Tipo de Evento</label>
+        <br>
+        <% tipoevento = { 'Consulta' => 'Consulta', 'Urgencia' => 'Urgencia',
+        'Hospitalizacion' => 'Hospitalizacion', 'Cirugia Ambulatoria' => 'CX AMBULATORIA',
+        'Procedimiento Terapeutico' => 'PROCEDIMIENTO TERAPEUTICO',} %>
+        <% lista_evento = tipoevento %>
+        <%= form.select :event_type, lista_evento, selected: "Consulta", id: :event_type , class: "form-control" %>
+      </div>
+
+
+
+      <div class="form-group col-lg-12">
+        <label for=":fecha_vencimiento">Fecha de Vencimiento</label>
+        <br>
+        <%= form.date_field :expiration_date , class: "form-control" %>
+
+      </div>
+
+      <div class="form-group col-lg-12 center card">
+        <span>Selecciona Categoria</span>
+        <br>
+        <br>
+          <% current_user.histories.all.each  do |history| %>
+                   <label class="form-group col-lg-3">
+                     <%= radio_button_tag "histories[]", history.id , id:"history_id"%>
+
+                     <span>
+                       <br>
+                         <%= "#{history.name.truncate(30)} "%>
+                     </span>
+                   </label>
+          <% end %>
+
+
+
+      </div>
+
+      <div class="form-group col-lg-12 center">
+        <div class="actions">
+          <br>
+          <%= form.submit "Guardar", class:"btn btn-primary"%>
+        </div>
+      </div>
+
+    <% end %>
+
+
+  </div>

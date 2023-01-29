@@ -1,0 +1,109 @@
+<div class="center">
+  <%= form_with(model: @post, local: true) do |form| %>
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+        <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>pi
+      </div>
+    <% end %>  
+    <div class=" ">
+      <div class="col-sm-12 col-md-12 col-lg-12 ">
+        <form>
+          <div class="center">
+            <div class="row">
+                  <div class="col-sm-2 col-md-2 col-lg-2 ">
+                    <div class="botonNuevo sombras ">
+                     <span class="categoriaArticulo">
+                     
+                     <% if user_signed_in? %>
+                    
+                        <% if current_user.is_admin? %>  
+                          Novedades
+                        <% end %>                      
+                        <% if current_user.is_normal_user? %>  
+                          Pregunta   
+                        <% end %>  
+                        <% if current_user.permission_level.nil? %>  
+                          Pregunta   
+                        <% end %>  
+                        <% if current_user.is_medico? %>  
+                          Artículos   
+                        <% end %>   
+                         <% end %>   
+                      </span>
+                    </div>                                      
+                  </div>
+                  <div class="col-sm-10 col-md-10 col-lg-10 ">
+                    <%= form.label :title ,"Titulo"  %>
+                    <%= form.text_field :title, class: "labeles labe" %>
+                  </div>         
+            </div>
+            <br>
+                        <div class="container">                
+              <div class="row">
+                <div class="col-12 center">
+                                  <div class="custom-control custom-switch">
+                    <%= form.check_box :anonimo, class: "custom-control-input checkB", id: "customSwitch1"  , checked:"true" %>
+                  <label class="custom-control-label" for="customSwitch1">Activar modo incognito: </label>
+                  </div>
+                  <img src="/images/icong.png" alt="" class="avatario">
+                  <br>
+                  <span>
+                    Si activas la casilla tu pregunta se realizara en modo incognito y no se expondrá tu nombre de usuario
+                  </span>
+                  
+                  <br>
+                        
+                </div>                             
+              </div> 
+          </div>
+            <br>
+            <div class="form-group row">
+                <%= form.label :body ,"Escribe tu articulo" , class:"col-sm-12 col-form-label col-form-label-lg" %>
+                <div class="col-sm-12 ">
+                  <%= form.text_area :body, class: "texArea" %>
+                </div>
+            </div> 
+          <div class="row">
+            <div class="center">
+              <div class="file-field field">
+                <div class="btn white center">
+                  <ul>
+                    <br>
+                    <li></li>
+                    <br>
+                    <li><%=form.file_field :imageblog , class: 'form-control'%></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+      <br>
+      <div class="row center">
+        <div class="actions field col-sm-12 col-md-12 col-lg-12 center">
+        <br>
+        <%= form.submit  "Guardar", class:"btn btn-outline-info  btn-lg" %>
+        <% end %>
+        </div>
+      </div>
+     </form>
+    </div>
+  
+    <br>
+    <br>
+      <br>
+      <br>
+      <br>
+    </div>
+  
+  
+  
+  
+  </div>
+  <br>

@@ -1,0 +1,186 @@
+<br><br><br>
+<div class="container card-0 justify-content-center menosArriba">
+  <div class="card-body px-sm-4 px-0">
+      <div class="row justify-content-center mb-5">
+          <div class="col-md-10 col">
+              <h3 class="font-weight-bold ml-md-0 mx-auto text-center text-sm-left "> Edita la informacion basica de contacto</h3>
+              <p class="mt-md-4 ml-md-0 ml-2 text-center text-sm-left "> 
+                Termina de diligenciar tu información basica , sera muy necesaria para acceder a todas las funcionalidad de Foro Medico
+              </p>
+          </div>
+      </div>
+      <div class="row justify-content-center round">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        
+          <div class="col-lg-12 col-md-12 ">
+              <div class="card shadow-lg card-1">
+                  <div class="card-body inner-card">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12 center  ">
+                        <div class="panelListado2">
+                          <h4 class="tituloDirectorio">  <img src="/images/confi.png" alt="" class="menuMediConfi">  Configuración de la cuenta   </h4>
+                        </div>
+                      </div>
+                      <br><br>
+                      <div class="col-sm-12 col-md-12 col-lg-12 center  ">
+                        <% if !current_user.fotoP.attachment.nil? %>
+                         <div>
+                            <%= cl_image_tag(current_user.fotoP.key,  sign_url: true ,class:"romboPerfil center" ) %>
+                          <br>
+                        </div>
+                          <% else %>
+              
+                      <% end %>
+                    </div>
+                  <div class="form-row">          
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 col-lg-10 col-12">
+                            <div class="form-group files">
+                              <label class="my-auto">Carga tu Foto de perfil</label> 
+                              <%=f.file_field :fotoP , class: 'form-control', id:"file"%>
+                            </div>            
+                        </div>
+                    </div>      
+                    </div>
+
+                      <div class="row justify-content-center">
+                          <div class="col-lg-5 col-md-6 col-sm-12">
+                            <%= f.label :first_name, "Primer Nombre" , class: "control-label"%>
+                            <div class=" ">
+                              <%= f.text_field :first_name, class: "form-control" %>
+                            </div>
+                             <div class="form-group">
+                              <%= f.label :last_name, "Primer Apellido" %>
+                              <div class=" ">
+                                <%= f.text_field :last_name, class: "form-control" %>
+                              </div>
+                             </div>
+                             <div class="form-group"> 
+                              <%= f.label :no_document, "No Documento", class: "control-label" %>
+                              <div class="">
+                                <%= f.text_field :no_document, class: "form-control" %>
+                              </div>
+                            </div>
+                              <div class="form-group"> 
+                              <%= f.label :tobacco_consumption, "Tabaco", class: "control-label" %>
+                              <div class="">
+                                <%= f.text_field :tobacco_consumption, class: "form-control" %>
+                              </div>
+                            </div>
+                            <div class="form-group"> 
+                              <%= f.label :alcohol_consumption, "alcohol", class: "control-label" %>
+                              <div class="">
+                                <%= f.text_field :alcohol_consumption, class: "form-control" %>
+                              </div>
+                            </div>
+                            <div class="form-group"> 
+                              <%= f.label :drugs_consumption, "Drogas", class: "control-label" %>
+                              <div class="">
+                                <%= f.text_field :drugs_consumption, class: "form-control" %>
+                              </div>
+                            </div>
+                               <div class="form-group"> 
+                              <%= f.label :sexual_activity, "sexual", class: "control-label" %>
+                              <div class="">
+                                <%= f.text_field :sexual_activity, class: "form-control" %>
+                              </div>
+                            </div>
+                              <div class="form-group">   
+                                <%= f.label :type_document, "Tipo documento actual", class: "control-label" %>                             
+                                <%= f.text_field :type_document, class: "form-control" ,disabled:"disabled"%>                                
+                              </div>
+                              <div class="form-group"> 
+                                <%= f.label :type_document, "Cambiar de tipo de documento", class: "control-label" %>                             
+                                <div class="">
+                                  <%= f.select :type_document, options_for_select(["C.C.","T.I.","C.E."]), {}, { class: "form-control" } %>                            
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <%= f.label :password %> <i>(Dejalo vacio si no quieres cambiar)</i><br />
+                                <%= f.password_field :password, autocomplete: "new-password" %>
+                                <% if @minimum_password_length %>
+                                  <br />
+                                  <em><%= @minimum_password_length %> characters minimum</em>
+                                <% end %>
+                             </div>
+                             <div class="form-group"> 
+                              <%= f.label :email, "Email", class: "col-md-6 control-label" %>
+                              <div class="col-m9-9 ">
+                                <%= f.text_field :email, class: "form-control" , disable:"disable"  %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-5 col-md-6 col-sm-12">
+                              <div class="form-group"> 
+                                <%= f.label :second_name, "Segundo nombre", class: "control-label" %>
+                                <div class="">
+                                  <%= f.text_field :second_name, class: "form-control" %>
+                                </div>
+                              </div>
+                              <div class="form-group"> 
+                                <%= f.label :second_last, "Segundo apellido", class: "control-label" %>
+                                <div class="">
+                                  <%= f.text_field :second_last, class: "form-control" %>
+                                </div>
+                              </div>
+                              <div class="form-group"> 
+                                <%= f.label :cellphone, "Celular", class: "control-label" %>
+                                <div class="">
+                                  <%= f.text_field :cellphone, class: "form-control" %>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="gray ">Fecha de nacimiento(dia-mes-año)</label>
+                                <div class="">
+                                  <%= date_field(:user, :birthdate) %>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <%= f.label :username, "Usuario", class: "col-md-6 control-label" %>
+                                <div class="col-m9-9 ">
+                                  <%= f.text_field :username, class: "form-control" %>
+                                </div>
+                                
+                              </div>
+                              <div class="form-group">
+                                <%= f.label :password_confirmation %><br />
+                                <%= f.password_field :password_confirmation, autocomplete: "new-password" %> </div>
+                                
+                              </div>
+                              
+                              
+                          </div>
+                             
+            <div class="container center">
+            <br>
+            <div class="actions ">
+                  <%= f.submit "Guardar" ,class:"btn btn-outline-info  btn-lg" %>
+                  <br><br>
+            </div>
+        <% end %>
+            </div>
+      <br>
+              <div class="row">
+                <br><br><br>
+                <div class="center">
+                  <%= link_to "X Eliminar cuenta", registration_path(resource_name), data: { confirm: "Estas seguro?" }, method: :delete ,class:"left btn btn-danger"%>
+                  <br>
+                  <br>
+                </div>
+                <p class="center">
+                  Si cancelas tu cuentas eliminaremos tu Información y no podras recuperarla, esta acción es irreversible, ¿ estas seguro?
+                </p>
+                <br>
+              </div>
+              
+
+              </div>
+              </div>
+            </div>
+           </div>
+          </div>
+      </div>
+  </div>
+</div>

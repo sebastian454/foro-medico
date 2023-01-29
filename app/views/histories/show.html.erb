@@ -1,0 +1,79 @@
+
+<div class="container">
+    <div class="row">
+      <div class="col col-lg-12 col-md-12 col-sm-12">
+        <div class="card " style="padding-left:5% ; padding-right: 5% ;  padding-top: 2% ;">
+          <div class="card-content black-text">
+            <span class="card-title">Carpeta clinica</span>
+            <p>
+              <strong>Usuario:</strong>
+              <%= @history.user.email %>
+            </p>
+            <p>
+              <strong>Nombre Carpeta:</strong>
+              <%= @history.name %>
+              <br>
+              <p>
+                <strong>Cantidad de Soportes:</strong>
+                <%= @history.supports.count %>
+                <br>
+            </p>
+          </div>
+          <div class="right">
+              << <%= link_to 'Atras', histories_path, class:"moradoTexto " %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Almacenar Soporte
+</button>
+
+<!-- Modal -->
+<div class="modal  fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="material-icons  left">image</i> Crear Soporte</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'formulario' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+ <div class="row">
+   <% @supports.each do |support| %>
+     <%= link_to support do %>
+     <div class="col col-lg-4 col-md-6 col-sm-12 ">
+       <div class="card cartaSoport">
+
+         <div class="card-image">
+           <%= cl_image_tag(support.soporte.key,  sign_url: true ,class:"fotoCartaHistories"  ) %>
+           <span class="card-title"><%= support.diagnosis.first(25) %></span>
+         </div>
+
+         <div class="card-content">
+               <% if user_signed_in? && current_user == support.user %>
+                 <%= link_to 'delete', support, class:"material-icons red-text", method: :delete, data: { confirm: 'Estas seguro que deseas eliminar permanentemente este archivo?' } %>
+               <% end %>
+               <%= link_to 'settings_applications', support , class:"material-icons"%>
+               Fecha:  <%= support.created_at.strftime("%F %T") %>
+         </div>
+
+       </div>
+     </div>
+     <% end %>
+   <% end %>
+   </div>
+  <br>
+</div>

@@ -1,0 +1,76 @@
+<% Post.order(created_at: :desc).each do |post| %>  
+ <% if post.user.is_admin? %>  
+  <div class="card hoverable foroIndex">
+  <div class="container">
+    <div class="row lineaInferior ">
+      <div class="row">
+        <h5 class="categoriaArticulo">     
+            Novedades             
+        </h5>
+      </div>
+      <div class="row">   
+        <div class="col-sm-8 col-md-8 col-lg-8">
+          <% if post.anonimo == true %>  
+          <img src="/images/icong.png" alt="" class="avatarnn">
+          anonimo
+          <% else %>
+          <ul class="listadoUl align-middle">
+            <li class=""><img src="/images/pers.png" alt="" class="avatarnn"></li>
+            <li class="">
+              <%= link_to post.user.username, user_path(post.user) ,class:"tituloLink" %>                
+          <% end %>  
+            </li>
+          </ul>
+
+        </div>     
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <br>
+          <div class="rigth">
+            <ul class="listadoUl align-middle">
+              <% if user_signed_in? && current_user == post.user %>                        
+                <%= link_to  edit_post_path(post) do %>
+                  <img src="/images/lapiz.png" alt="" class="menuMediXt " >
+                <% end%>          
+            <% end %>
+              
+            </ul>
+  
+          </div>
+          
+
+        </div>
+      
+   
+
+      </div>
+             
+      <br>
+    </div>
+    <div class="row lineaBottom">
+      <h4><%= post.title %></h4>
+            <%= post.body.truncate(200) %>
+        <%= link_to post do %>
+          <% if !post.imageblog.attachment.nil? %>
+            <%= cl_image_tag(post.imageblog.key,  sign_url: true ,class:"portadaBlogIndex") %>
+          <% else %>
+            <img src="/images/nno.png" alt="" class="portadaBlogIndex " >
+          <% end %>
+         
+        <% end %>  
+    </div>
+    <br>
+    <ul  class="listadoUl align-middle">      
+      <li>
+        <img class="mensajesC" src="/images/comments.png" alt="">        
+        <span class="numeritoBlog3 center "><%= post.comments.count%></span>
+      </li>
+      <li class="espaciadoLista"><h6><%= pluralize(post.views, "Vistas") %></h6></li>
+    </ul>
+    
+
+  </div>
+  
+  </div>
+
+ <% end %>    
+<% end %>
