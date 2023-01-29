@@ -76,8 +76,8 @@ Una vez que haya completado estos pasos, puede ver el sitio visitando [http://lo
 Dejanos tus dudas comentarios y apoyo en nuestras redes sociales.
 
 
-## Enlaces de interés
-
+## Enlaces de redes sociales 
 - [Facebook](https://www.facebook.com/Zafiroaplicacion/)
 - [Instagram](https://www.instagram.com/zafiroapp/?hl=es)
 - [LinkedIn](https://www.linkedin.com/company/zafiroapp?)
+- [Web site Sebastián](https://sebastian-agudelo.web.app/)
